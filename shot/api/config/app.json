@@ -1,0 +1,38 @@
+{
+  "acceptedMimeTypes": [
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "image/gif"
+  ],
+  "maxImageSizeMb": 20,
+  "maxBatchFiles": 300,
+  "targetProcessingMs": 5000.0,
+  "requiredGovWarning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+  "extractionModel": "gpt-4o",
+  "extractionPrompt": "You are reading a photographed alcohol label for OCR extraction. Extract only text that is directly visible in the image. Never infer, autocomplete, or guess obscured, blurry, cut-off, or unreadable text. If no reliable text is visible, return null for every field and an empty string for raw. Preserve original capitalization for any text you can actually read.\n\nRequired JSON schema:\n{\n  \"brand\": \"brand name exactly as shown, or null\",\n  \"class_type\": \"class/type designation exactly as shown, or null\",\n  \"abv\": \"alcohol content exactly as shown, or null\",\n  \"net\": \"net contents exactly as shown, or null\",\n  \"warning\": \"complete government warning text exactly as shown, or null\",\n  \"raw\": \"only the visible text that can actually be read from the image, concatenated\"\n}\n\nReturn ONLY valid JSON. Use null for fields not found on the label. Do not use prior knowledge about common label wording.",
+  "probableMatchThreshold": 0.88,
+  "preprocessingContrastFactor": 1.25,
+  "preprocessingSharpnessFactor": 1.35,
+  "ocrImageMaxDimension": 2000,
+  "ocrImageQuality": 86,
+  "ocrImageDetail": "auto",
+  "fieldDefinitions": [
+    {
+      "label": "Brand Name",
+      "attribute": "brand"
+    },
+    {
+      "label": "Class / Type",
+      "attribute": "class_type"
+    },
+    {
+      "label": "Alcohol Content (ABV)",
+      "attribute": "abv"
+    },
+    {
+      "label": "Net Contents",
+      "attribute": "net"
+    }
+  ]
+}

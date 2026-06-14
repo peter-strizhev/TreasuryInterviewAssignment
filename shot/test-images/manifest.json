@@ -1,0 +1,146 @@
+{
+  "required_government_warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+  "default_expected_values": {
+    "brand_name": "OLD TOM DISTILLERY",
+    "class_type": "Kentucky Straight Bourbon Whiskey",
+    "alcohol_content": "45% Alc./Vol. (90 Proof)",
+    "net_contents": "750 mL"
+  },
+  "cases": [
+    {
+      "file": "label_01_perfect_pass.png",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Expected overall PASS when expected values match DEFAULT_EXPECTED"
+    },
+    {
+      "file": "label_02_warning_titlecase_fail.png",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "Government Warning: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Should FAIL: 'GOVERNMENT WARNING:' is not all caps"
+    },
+    {
+      "file": "label_03_warning_text_mismatch_fail.png",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and can cause health issues.",
+      "notes": "Should FAIL: warning text does not exactly match"
+    },
+    {
+      "file": "label_04_missing_warning_fail.png",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": null,
+      "notes": "Should FAIL: warning statement missing"
+    },
+    {
+      "file": "label_05_field_mismatch_fail.png",
+      "title": "STONE'S THROW",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "44% Alc./Vol. (88 Proof)",
+      "net": "700 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Should FAIL field comparisons when using DEFAULT_EXPECTED"
+    },
+    {
+      "file": "label_06_case_variant_review.png",
+      "title": "Old Tom Distillery",
+      "class_type": "kentucky straight bourbon whiskey",
+      "abv": "45% alc./vol. (90 proof)",
+      "net": "750 ml",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Likely REVIEW on case-sensitive fields depending on OCR output"
+    },
+    {
+      "file": "label_07_low_contrast_challenge.png",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Low contrast to stress OCR readability"
+    },
+    {
+      "file": "label_08_slight_rotation_challenge.png",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Rotated image to simulate non-perfect photography"
+    },
+    {
+      "file": "label_09_heavy_rotation_low_contrast_image_of_screen.jpg",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Rotated image to simulate non-perfect photography"
+    },
+    {
+      "file": "label_10_low_contrast_image_of_screen_upside_down.jpg",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Rotated image to simulate non-perfect photography"
+    },
+    {
+      "file": "label_11_extreme_perspective_glare.jpg",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Worst-case camera-style capture with strong skew, glare, and dark background"
+    },
+    {
+      "file": "label_12_low_light_motion_blur.jpg",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Worst-case dim photo with blur, sensor noise, and vignette"
+    },
+    {
+      "file": "label_13_screen_moire_tilt.jpg",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Worst-case screen capture with moire-like scanlines, tilt, and bezel framing"
+    },
+    {
+      "file": "label_14_shadow_occlusion.jpg",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": "GOVERNMENT WARNING: (1) According to the Surgeon General, women should not drink alcoholic beverages during pregnancy because of the risk of birth defects. (2) Consumption of alcoholic beverages impairs your ability to drive a car or operate machinery, and may cause health problems.",
+      "notes": "Worst-case physical obstruction with diagonal shadow and partial sticker occlusion"
+    },
+    {
+      "file": "label_15_partial_crop_warning_fail.jpg",
+      "title": "OLD TOM DISTILLERY",
+      "class_type": "Kentucky Straight Bourbon Whiskey",
+      "abv": "45% Alc./Vol. (90 Proof)",
+      "net": "750 mL",
+      "warning": null,
+      "notes": "Should FAIL: framing crop cuts off part of the warning block in a realistic handheld capture"
+    }
+  ]
+}
