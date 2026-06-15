@@ -16,7 +16,6 @@ from services.validation import ValidationService
 
 load_dotenv()
 
-
 def _get_origins() -> list[str]:
     cfg = os.getenv("FRONTEND_URL") or "http://localhost:3000"
     return [origin.strip() for origin in cfg.split(",") if origin.strip()]
@@ -109,8 +108,3 @@ def get_batch(job_id: str) -> BatchJob:
     if job is None:
         raise HTTPException(status_code=404, detail="Batch job not found")
     return job
-
-# Health check endpoint for render.com
-@app.get("/health")
-def health():
-    return {"status": "ok"}
