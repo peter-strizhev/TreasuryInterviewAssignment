@@ -104,3 +104,8 @@ def get_batch(job_id: str) -> BatchJob:
     if job is None:
         raise HTTPException(status_code=404, detail="Batch job not found")
     return job
+
+# Health check endpoint for render.com
+@app.get("/health")
+def health():
+    return {"status": "ok"}

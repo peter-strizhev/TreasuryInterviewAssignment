@@ -108,6 +108,3 @@ coverage.xml
 .DS_Store?
 Thumbs.db
 Ehthumbs.db
-
-#temp
-tests/
