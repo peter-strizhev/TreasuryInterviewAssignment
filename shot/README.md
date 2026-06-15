@@ -18,7 +18,7 @@ Upload Image → OpenAI Vision (OCR Service) → Extract Fields → Validation E
 
 ## Setup
 
-### Backend
+### API
 
 ```bash
 cd shot/api
@@ -38,7 +38,7 @@ uvicorn main:app --reload
 # API docs: http://localhost:8000/docs
 ```
 
-### Frontend
+### Client
 
 ```bash
 cd shot/client
@@ -58,19 +58,19 @@ npm run dev
 | Government Warning | Extracted and validated against exact TTB-mandated text |
 
 ### Government Warning Validation (per Jenny Park's requirements)
-- ✅ Warning statement must be present
-- ✅ `GOVERNMENT WARNING:` must appear in all-capital letters
-- ✅ Full warning text must match TTB-mandated wording exactly
+- Warning statement must be present
+- `GOVERNMENT WARNING:` must appear in all-capital letters
+- Full warning text must match TTB-mandated wording exactly
 
 ## Environment Variables
 
-### Backend (`.env`)
+### API (`.env`)
 | Variable | Description |
 |---|---|
 | `OPENAI_API_KEY` | OpenAI API key with GPT-4o access |
 | `FRONTEND_URL` | Frontend origin for CORS (default: `http://localhost:3000`) |
 
-### Frontend (optional `.env.local`)
+### Client (optional `.env.local`)
 | Variable | Description |
 |---|---|
 | `NEXT_PUBLIC_API_URL` | Backend base URL (default: `http://localhost:8000`) |
@@ -85,7 +85,7 @@ npm run dev
 
 ## Testing
 
-### Backend tests
+### API tests
 
 ```bash
 cd shot/api
@@ -102,14 +102,3 @@ The backend suite includes:
 - preprocessing integration tests that run representative sample images from `shot/test-images/` through the OCR image-prep pipeline
 - a manifest-backed sample label suite that checks expected compliance outcomes and sample file presence
 - edge-case tests for blank OCR output and unsupported file types
-
-### Optional live OCR integration
-
-```bash
-cd shot/api
-set SHOT_RUN_LIVE_OCR_TESTS=1
-set OPENAI_API_KEY=your-key
-.venv\Scripts\python -m pytest -q -m live_ocr
-```
-
-These tests call the configured OpenAI OCR backend against real images in `shot/test-images/` and are skipped by default.
