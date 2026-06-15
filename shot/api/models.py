@@ -8,7 +8,6 @@ from pydantic import BaseModel, Field
 
 WATERMARK_TEXT = "Created by Peter Strizhev for US Treasury Interview"
 
-
 class ComplianceStatus(str, Enum):
     COMPLIANT = "compliant"
     NON_COMPLIANT = "non_compliant"

@@ -8,7 +8,6 @@ from PIL import Image, ImageEnhance, ImageOps
 from models import OCRPreprocessingStep
 from config.settings import settings
 
-
 @dataclass
 class PreprocessedImage:
     img: bytes
@@ -31,18 +30,18 @@ class PreprocessingService:
                 )
             )
 
-            width, height = pic.size
+            w, h = pic.size
             if max(pic.size) > settings.ocrImageMaxDimension:
                 pic.thumbnail((settings.ocrImageMaxDimension, settings.ocrImageMaxDimension), Image.Resampling.LANCZOS)
                 resized = True
                 details = (
-                    f"Downscaled the OCR image from {width}x{height} to "
+                    f"Downscaled the OCR image from {w}x{h} to "
                     f"{pic.width}x{pic.height} to reduce payload size and response time."
                 )
             else:
                 resized = False
                 details = (
-                    f"Kept the original OCR size at {width}x{height} because it was already within the "
+                    f"Kept the original OCR size at {w}x{h} because it was already within the "
                     f"{settings.ocrImageMaxDimension}px max dimension."
                 )
             steps.append(

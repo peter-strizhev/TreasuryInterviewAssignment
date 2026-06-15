@@ -9,7 +9,6 @@ from datetime import datetime, timezone
 from services.analysis import AnalysisService
 from models import BatchJob, BatchJobItemResult, BatchJobStatus, BatchJobSummary, ExpectedValues
 
-
 @dataclass
 class BatchFilePayload:
     file: str

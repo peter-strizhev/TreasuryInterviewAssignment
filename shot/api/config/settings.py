@@ -33,5 +33,4 @@ def _load_settings() -> AppSettings:
         raw_settings = json.load(config_file)
     return AppSettings.model_validate(raw_settings)
 
-
 settings = _load_settings()

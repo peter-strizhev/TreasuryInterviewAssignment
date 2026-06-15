@@ -27,7 +27,7 @@ class OCRService:
         )
 
     def _extract(self, img: bytes, mime: str) -> ExtractedFields:
-        raw_img = base64.b64encode(img).decode()
+        raw = base64.b64encode(img).decode()
 
         rsp = self._client.chat.completions.create(
             model=settings.extractionModel,
@@ -39,7 +39,7 @@ class OCRService:
                         {
                             "type": "image_url",
                             "image_url": {
-                                "url": f"data:{mime};base64,{raw_img}",
+                                "url": f"data:{mime};base64,{raw}",
                                 "detail": settings.ocrImageDetail,
                             },
                         },
@@ -50,12 +50,12 @@ class OCRService:
             max_tokens=640,
         )
 
-        response_content = rsp.choices[0].message.content
-        if not response_content:
+        rsp_content = rsp.choices[0].message.content
+        if not rsp_content:
             return ExtractedFields()
 
         try:
-            raw = json.loads(response_content)
+            raw = json.loads(rsp_content)
         except json.JSONDecodeError:
             return ExtractedFields()
 
