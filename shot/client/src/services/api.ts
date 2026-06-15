@@ -1,6 +1,6 @@
 import type { BatchJob, ExpectedValues, LabelAnalysisResult } from '@/types/domain';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+const API_BASE = (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000').replace(/\/$/, '');
 
 async function parseResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
