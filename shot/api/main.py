@@ -16,6 +16,11 @@ from services.validation import ValidationService
 
 load_dotenv()
 
+
+def _get_origins() -> list[str]:
+    cfg = os.getenv("FRONTEND_URL") or "http://localhost:3000"
+    return [origin.strip() for origin in cfg.split(",") if origin.strip()]
+
 _OPENAI_KEY = os.getenv("OPENAI_API_KEY", "")
 if not _OPENAI_KEY:
     raise RuntimeError("OPENAI_API_KEY environment variable is not set")
@@ -28,7 +33,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("FRONTEND_URL", "http://localhost:3000")],
+    allow_origins=_get_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
