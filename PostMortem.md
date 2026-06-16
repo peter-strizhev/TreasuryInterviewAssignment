@@ -68,11 +68,11 @@ I also assumed the user is comfortable with a basic web workflow, including navi
 
 The API was built with Python and FastAPI using a lightweight service-based structure intended to scale cleanly without becoming over-engineered for a prototype.
 
-The main entry point, [shot/api/main.py](/d:/TreasuryInterviewAssignment/shot/api/main.py), acts as the routing and middleware layer. It configures CORS, loads environment settings, instantiates the core services, and exposes the HTTP endpoints for health checks, single-image analysis, and batch processing.
+The main entry point, [shot/api/main.py](shot/api/main.py), acts as the routing and middleware layer. It configures CORS, loads environment settings, instantiates the core services, and exposes the HTTP endpoints for health checks, single-image analysis, and batch processing.
 
-The shared domain contracts live in [shot/api/models.py](/d:/TreasuryInterviewAssignment/shot/api/models.py). These models define the extracted OCR fields, expected values, validation results, processing metrics, and batch job structures. Keeping these models centralized made the rest of the API easier to reason about and helped the client integration stay predictable.
+The shared domain contracts live in [shot/api/models.py](shot/api/models.py). These models define the extracted OCR fields, expected values, validation results, processing metrics, and batch job structures. Keeping these models centralized made the rest of the API easier to reason about and helped the client integration stay predictable.
 
-Configuration is loaded from [shot/api/config/settings.py](/d:/TreasuryInterviewAssignment/shot/api/config/settings.py) and [shot/api/config/app.json](/d:/TreasuryInterviewAssignment/shot/api/config/app.json). This keeps model selection, thresholds, image-preprocessing settings, field definitions, and performance targets out of the implementation code.
+Configuration is loaded from [shot/api/config/settings.py](shot/api/config/settings.py) and [shot/api/config/app.json](shot/api/config/app.json). This keeps model selection, thresholds, image-preprocessing settings, field definitions, and performance targets out of the implementation code.
 
 I selected GPT-4o for OCR because it was inexpensive enough for a prototype while still producing usable results for the problem space. With a larger budget, I would test newer models for better OCR accuracy, but for this assignment the tradeoff between cost and quality was appropriate.
 
@@ -80,17 +80,17 @@ The code style emphasizes readability and straightforward control flow. I prefer
 
 Render was chosen for API deployment because it was fast to stand up and easy to use for validation during development.
 
-The validation test suite was generated with assistance from GPT-5.5 and then used to exercise the main use cases. The sample images in [test-images](/d:/TreasuryInterviewAssignment/test-images) and the associated manifest include generated examples plus some manually selected cases intended to push the edge conditions.
+The validation test suite was generated with assistance from GPT-5.5 and then used to exercise the main use cases. The sample images in [shot/test-images](shot/test-images) and the associated manifest include generated examples plus some manually selected cases intended to push the edge conditions.
 
 ## API Technical Writeup
 
-The API follows a composition-root plus service-layer design. At import time, [shot/api/main.py](/d:/TreasuryInterviewAssignment/shot/api/main.py) loads the OpenAI API key, builds singleton-style service instances for OCR, validation, analysis, and batch execution, and wires them into FastAPI route handlers. This keeps request handlers thin and pushes the actual business logic into testable service classes.
+The API follows a composition-root plus service-layer design. At import time, [shot/api/main.py](shot/api/main.py) loads the OpenAI API key, builds singleton-style service instances for OCR, validation, analysis, and batch execution, and wires them into FastAPI route handlers. This keeps request handlers thin and pushes the actual business logic into testable service classes.
 
 ### Request Lifecycle
 
 For single-image analysis, the `/api/analyze` endpoint accepts a multipart upload plus a JSON-encoded `expected` form field. The route deserializes the expected values into the `ExpectedValues` Pydantic model and reads the uploaded image into memory before passing both into `AnalysisService.analyze()`.
 
-`AnalysisService` is the orchestration layer for request-time work. It enforces input constraints first by validating MIME type and file size against configuration values loaded from [shot/api/config/settings.py](/d:/TreasuryInterviewAssignment/shot/api/config/settings.py). Once the payload passes validation, it performs two timed stages:
+`AnalysisService` is the orchestration layer for request-time work. It enforces input constraints first by validating MIME type and file size against configuration values loaded from [shot/api/config/settings.py](shot/api/config/settings.py). Once the payload passes validation, it performs two timed stages:
 
 1. OCR extraction through `OCRService`
 2. Compliance evaluation through `ValidationService`
@@ -101,7 +101,7 @@ Those timings are attached to the response as stage metrics so the client can di
 
 The OCR path is deliberately split into preprocessing and extraction.
 
-`OCRService.extract()` first delegates to `PreprocessingService` in [shot/api/services/processing.py](/d:/TreasuryInterviewAssignment/shot/api/services/processing.py). The preprocessing pipeline does the following in order:
+`OCRService.extract()` first delegates to `PreprocessingService` in [shot/api/services/processing.py](shot/api/services/processing.py). The preprocessing pipeline does the following in order:
 
 1. Normalizes the image into RGB
 2. Resizes the image down to a configured maximum dimension when needed
@@ -117,7 +117,7 @@ The response handling is intentionally defensive. If the model returns no conten
 
 ### Validation Engine Design
 
-`ValidationService` in [shot/api/services/validation.py](/d:/TreasuryInterviewAssignment/shot/api/services/validation.py) is where domain evaluation happens. The service is configuration-driven for standard fields: it iterates over `fieldDefinitions` from the application settings rather than hard-coding every comparison directly in the request handler.
+`ValidationService` in [shot/api/services/validation.py](shot/api/services/validation.py) is where domain evaluation happens. The service is configuration-driven for standard fields: it iterates over `fieldDefinitions` from the application settings rather than hard-coding every comparison directly in the request handler.
 
 Each field is evaluated through a graduated matching strategy:
 
@@ -133,7 +133,7 @@ The government warning is treated as a specialized validation path rather than j
 
 ### Batch Processing Architecture
 
-Batch processing is implemented as an in-memory asynchronous queue in [shot/api/services/batch.py](/d:/TreasuryInterviewAssignment/shot/api/services/batch.py). The `BatchProcessingService` stores batch jobs in a process-local dictionary and uses an `asyncio.Queue` plus a background worker task that starts on FastAPI startup and stops on shutdown.
+Batch processing is implemented as an in-memory asynchronous queue in [shot/api/services/batch.py](shot/api/services/batch.py). The `BatchProcessingService` stores batch jobs in a process-local dictionary and uses an `asyncio.Queue` plus a background worker task that starts on FastAPI startup and stops on shutdown.
 
 When a batch is submitted to `/api/batches`, the API reads each upload into memory, converts the files into `BatchFilePayload` records, creates a `BatchJob`, and enqueues the job identifier. The worker then processes each file sequentially, offloading the synchronous analysis path through `asyncio.to_thread()` so the event loop is not blocked by CPU-bound or network-bound work inside the analysis stack.
 
@@ -141,7 +141,7 @@ This is a pragmatic MVP design because it adds batch capability without introduc
 
 ### Domain Modeling and Response Shape
 
-The Pydantic models in [shot/api/models.py](/d:/TreasuryInterviewAssignment/shot/api/models.py) are the backbone of the API contract. The response shape is richer than a basic OCR response because it combines:
+The Pydantic models in [shot/api/models.py](shot/api/models.py) are the backbone of the API contract. The response shape is richer than a basic OCR response because it combines:
 
 - Structured extracted fields
 - Per-field compliance results
