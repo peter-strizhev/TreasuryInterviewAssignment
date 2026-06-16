@@ -60,7 +60,7 @@ The biggest assumption was that this was an MVP rather than a fully productioniz
 
 I also assumed a fairly standard label presentation: reasonably high contrast, readable text, and a surface condition that a multimodal model could interpret reliably. Ideally, I would have been given a broader set of real-world labels with more environmental variation. That said, I still tried to include some worst-case examples while testing.
 
-I deliberately took an overly cautious approach to compliance decisions. The system is biased toward warnings and failures rather than false passes. That increases the number of labels requiring human review, but it materially reduces the risk of incorrectly approving a label. Even with manual review for flagged cases, the workload would still be significantly lower than a fully manual process.
+I deliberately took an overly cautious approach to compliance decisions. The system is biased toward warnings and failures rather than false positives. That increases the number of labels requiring human review, but it materially reduces the risk of incorrectly approving a label. Even with manual review for flagged cases, the workload would still be significantly lower than a fully manual process.
 
 I also assumed the user is comfortable with a basic web workflow, including navigating a browser and selecting image files from a local file system.
 
