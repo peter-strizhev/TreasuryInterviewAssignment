@@ -28,9 +28,9 @@ class AppSettings(BaseModel):
 
 
 def _load_settings() -> AppSettings:
-    config_path = Path(__file__).resolve().parent / "app.json"
-    with config_path.open("r", encoding="utf-8") as config_file:
-        raw_settings = json.load(config_file)
-    return AppSettings.model_validate(raw_settings)
+    path = Path(__file__).resolve().parent / "app.json"
+    with path.open("r", encoding="utf-8") as config_file:
+        raw = json.load(config_file)
+    return AppSettings.model_validate(raw)
 
 settings = _load_settings()
